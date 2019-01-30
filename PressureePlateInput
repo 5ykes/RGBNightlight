@@ -1,0 +1,32 @@
+void loop(void) { 
+ Serial.println("photocellReading");
+ photocellReading = analogRead(photocellPin);
+  Serial.println(photocellReading);     // the raw analog reading*/
+
+ Serial.println("inputReading");
+ inputReading = analogRead(inputPin);
+  Serial.println(inputReading);     // the raw input reading
+  
+  // if room is dark
+  if(photocellReading < 750) {
+    setColor(0, 255, 0);  // green default
+     
+    // light is on
+    if(inputReading > 950)
+     setColor(random(0,254), random(0,254), random(0,254));  // RandomColor excl. 255
+  }
+  // if room is bright
+  else {setColor(255, 255, 255);  // Lightoff  
+  }
+  delay(500);
+}  
+
+void setColor(int red, int green, int blue)
+{
+  analogWrite(RGB_RED_PIN, red);
+  analogWrite(RGB_GREEN_PIN, green);
+  analogWrite(RGB_BLUE_PIN, blue);  
+ 
+  delay(100);
+}
+
