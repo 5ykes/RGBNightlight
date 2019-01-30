@@ -1,7 +1,31 @@
+
+// Start Adafruit Code //
+#define COMMON_ANODE 1  
+int photocellPin = 0;     // the cell and 10K pulldown are connected to a0
+int photocellReading;     // the analog reading from the sensor divider
+int RGB_RED_PIN = 6;
+int RGB_GREEN_PIN  = 5;
+int RGB_BLUE_PIN  = 3;
+//int LEDpin = 11;          // connect Red LED to pin 11 (PWM pin)
+int LEDbrightness;  // 
+int _curBrightness = 0; // can be 0 to 100
+int inputPin = 1;     // the cell and 10K pulldown are connected to a0
+int inputReading;     // the analog reading from the sensor divider
+
+void setup() {
+  // Set the RGB pins to output
+  pinMode(RGB_RED_PIN, OUTPUT);
+  pinMode(RGB_GREEN_PIN, OUTPUT);
+  pinMode(RGB_BLUE_PIN, OUTPUT);
+
+  // Turn on Serial so we can verify expected colors via Serial Monitor
+  Serial.begin(9600); 
+} // End Adafruit code// 
+ 
 void loop(void) { 
  Serial.println("photocellReading");
  photocellReading = analogRead(photocellPin);
-  Serial.println(photocellReading);     // the raw analog reading*/
+  Serial.println(photocellReading);     // the raw analog reading - credit: Jon F
 
  Serial.println("inputReading");
  inputReading = analogRead(inputPin);
@@ -27,6 +51,5 @@ void setColor(int red, int green, int blue)
   analogWrite(RGB_GREEN_PIN, green);
   analogWrite(RGB_BLUE_PIN, blue);  
  
-  delay(100);
+  delay(100);  // credit: Adafruit Code
 }
-
